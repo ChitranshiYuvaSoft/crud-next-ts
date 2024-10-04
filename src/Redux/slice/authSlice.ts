@@ -1,27 +1,44 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface User {
+  email: string;
+  password: number | null;
+  token: any;
+}
 
 interface authData {
-  user: { name: string; email: string; password: number };
-  edit: {user : {} , isEdit : boolean};
+  user: User;
 }
 
 const initialState: authData = {
-    user : {
-        name : "Avni",
-        email : "avni12@gmail.com",
-        password : 123456
-    },
-    edit : {
-      user : {},
-      isEdit : false,
-    }
-    
+  user: {
+    email: "",
+    password: null,
+    token: null,
+  },
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    loginUser: (state, action) => {
+      const { email, password, token } = action.payload;
+      const tokenSet = token;
+      localStorage.setItem("token", tokenSet);
+      return {
+        user: {
+          email: email,
+          password: password,
+          token: token,
+        },
+      };
+    },
+
+    
+  },
 });
+
+export const { loginUser } = authSlice.actions;
 
 export default authSlice.reducer;

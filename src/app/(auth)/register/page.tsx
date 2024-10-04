@@ -1,6 +1,21 @@
+"use client"
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const page = () => {
+
+  const router = useRouter();
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    if(token){
+      router.push('data-table')
+    }else{
+      router.push('/register');
+    }
+  },[token])
+
   return (
     <>
       <div className="w-full h-[100vh] bg-blue-300 flex items-center justify-center">
