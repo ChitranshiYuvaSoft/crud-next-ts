@@ -39,6 +39,7 @@ const page = () => {
 
   const Logout = () => {
     localStorage.clear();
+    window.location.reload();
   };
   return (
     <div className="w-full h-[100vh]  bg-blue-300 flex items-center justify-between flex-col ">
